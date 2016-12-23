@@ -36,11 +36,31 @@ public class MainActivity extends AppCompatActivity {
         volumeControl.setMax(maxVolume);
         volumeControl.setProgress(curVolume);
 
+        SeekBar scrubber = (SeekBar) findViewById(R.id.scrubber);
+        scrubber.setMax(mplayer.getDuration());
+
         volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.i("Seekbar value", Integer.toString(progress));
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        scrubber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.i("Scrubber value: ", Integer.toString(progress));
             }
 
             @Override
